@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "serve -s dist",
+    "develop": "NODE_OPTIONS='--openssl-legacy-provider' gatsby develop",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
