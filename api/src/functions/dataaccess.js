@@ -1,30 +1,21 @@
 const { app } = require('@azure/functions');
-const { CosmosClient } = require('@azure/cosmos');
 
-const endpoint = process.env.COSMOS_DB_ENDPOINT; // 例: "https://<your-account>.documents.azure.com:443/"
-const key = process.env.COSMOS_DB_KEY; // Cosmos DB のキー
-const databaseId = process.env.COSMOS_DB_DATABASE; // データベース名
-const containerId = process.env.COSMOS_DB_CONTAINER; // コンテナ名
-
-app.http('getCosmosData', {
-    methods: ['GET'],
+app.http('dataaccess', {
+    methods: ['GET', 'POST'],
     authLevel: 'anonymous',
     handler: async (request, context) => {
+        context.log(`Http function processed request for url "${request.url}"`);
+
+        // 外部APIのURL
+        const externalUrl = 'https://prod-08.japaneast.logic.azure.com:443/workflows/0e78b3fb50784f64b6ad6aab8293efa7/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=VoXRXosCyaqc8L0KINGSS9d4hLfHVmwpM-q7FVmtP38';
+
         try {
-            const client = new CosmosClient({ endpoint, key });
-            const database = client.database(databaseId);
-            const container = database.container(containerId);
-
-            // クエリ例: 全データ取得
-            const querySpec = {
-                query: 'SELECT * FROM MyTestPersonContainer'
-            };
-
-            const { resources: items } = await container.items.query(querySpec).fetchAll();
+            const response = await fetch(externalUrl);
+            const data = await response.json();
 
             return {
                 status: 200,
-                body: JSON.stringify(items),
+                body: JSON.stringify(data),
                 headers: { 'Content-Type': 'application/json' }
             };
         } catch (error) {
