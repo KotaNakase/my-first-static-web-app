@@ -5,11 +5,11 @@
 <script>
 export default {
   name: "App",
-  items: [],
-  item: "",
   data() {
     return {
-      message: ""
+      message: "",
+      items: [],
+      item: "",
     };
   },
   async mounted() {
