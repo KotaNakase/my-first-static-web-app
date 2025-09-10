@@ -1,9 +1,6 @@
 <template>
   <div>
     <div>
-      {{ items }}
-    </div>
-    <div>
       <b-table striped responsive hover :items="items" :fields="fields" />
     </div>
   </div>
