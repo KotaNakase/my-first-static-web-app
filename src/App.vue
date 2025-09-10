@@ -1,5 +1,5 @@
 <template>
-  <div>{{ message }}</div>
+  <div>{{ items }}</div>
 </template>
 
 <script>
@@ -7,12 +7,16 @@ export default {
   name: "App",
   data() {
     return {
-      message: ""
+      message: "",
+      items: [],
     };
   },
   async mounted() {
-    const { text } = await (await fetch("/api/dataaccess"));
-    this.message = text;
+    const response = await (await fetch("/api/dataaccess"));
+    items = JSON.parse(response.body);
+    for(data of items) {
+      console.log(data);
+    }
   }
 };
 </script>
