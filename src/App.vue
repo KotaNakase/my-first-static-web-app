@@ -7,15 +7,17 @@ export default {
   name: "App",
   data() {
     return {
-      message: "",
       items: [],
     };
   },
   async mounted() {
-    const response = await fetch("/api/dataaccess");
-    this.items = await response.json();
-    for (let item of this.items) {
-      console.log(item);
+    const response = await(await fetch("/api/dataaccess")).json();
+    for (let item of JSON.parse(response.body)) {
+      this.items.push({
+        id: item.RowKey,
+        title: item.title,
+        content: item.contentk,
+      });
     }
   }
 };
