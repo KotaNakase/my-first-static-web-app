@@ -11,7 +11,7 @@ export default {
     };
   },
   async mounted() {
-    const { text } = await (await fetch("/api/dataaccess")).json();
+    const { text } = await (await fetch("/api/dataaccess"));
     this.message = text;
   }
 };
