@@ -12,9 +12,9 @@ export default {
     };
   },
   async mounted() {
-    const response = await (await fetch("/api/dataaccess"));
-    this.items = JSON.parse(response.body);
-    for(let item of this.items) {
+    const response = await fetch("/api/dataaccess");
+    this.items = await response.json();
+    for (let item of this.items) {
       console.log(item);
     }
   }

@@ -12,7 +12,6 @@ app.http('dataaccess', {
         try {
             const response = await fetch(externalUrl);
             const data = await response.json();
-            console.log(data);
 
             return {
                 status: 200,
