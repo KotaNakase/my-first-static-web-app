@@ -5,17 +5,18 @@
 <script>
 export default {
   name: "App",
+  items: [],
+  item: "",
   data() {
     return {
-      message: "",
-      items: [],
+      message: ""
     };
   },
   async mounted() {
     const response = await (await fetch("/api/dataaccess"));
     items = JSON.parse(response.body);
-    for(data of items) {
-      console.log(data);
+    for(item of items) {
+      console.log(item);
     }
   }
 };
