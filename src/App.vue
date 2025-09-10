@@ -14,7 +14,7 @@ export default {
   async mounted() {
     const response = await fetch("/api/dataaccess");
     this.body = await response.json();
-    for (let item of JSON.parse(this.body)) {
+    for (let item of this.body) {
       this.items.push({
         id: item.RowKey,
         title: item.title,
