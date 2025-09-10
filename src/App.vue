@@ -9,13 +9,12 @@ export default {
     return {
       message: "",
       items: [],
-      item: "",
     };
   },
   async mounted() {
     const response = await (await fetch("/api/dataaccess"));
-    items = JSON.parse(response.body);
-    for(item of items) {
+    this.items = JSON.parse(response.body);
+    for(let item of this.items) {
       console.log(item);
     }
   }
