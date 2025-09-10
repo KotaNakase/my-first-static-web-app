@@ -1,5 +1,6 @@
 <template>
   <div>{{ items }}</div>
+  <b-table striped responsive hover :items="items" :fields="fields" />
 </template>
 
 <script>
@@ -9,6 +10,11 @@ export default {
     return {
       items: [],
       body: "",
+      fields: [
+        { key: "id", label: "ID" },
+        { key: "title", label: "タイトル" },
+        { key: "content", label: "内容" },
+      ],
     };
   },
   async mounted() {
@@ -18,7 +24,7 @@ export default {
       this.items.push({
         id: item.RowKey,
         title: item.title,
-        content: item.contentk,
+        content: item.content,
       });
     }
   }
